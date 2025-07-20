@@ -1,0 +1,21 @@
+name = "disequi-v4"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = false
+
+[[rules]]
+type = "Text"
+globs = ["**/*.css", "**/*.js"]
+fallthrough = false
+
+[env.production]
+name = "disequi-v4-production"
