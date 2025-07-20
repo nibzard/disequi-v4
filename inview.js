@@ -1,81 +1,91 @@
-import { motion, animate } from 'https://esm.sh/framer-motion@11.0.4';
-
 // Check for reduced motion preference
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Animate main title on load
+// Main animation controller
 document.addEventListener('DOMContentLoaded', () => {
-  const mainTitle = document.getElementById('main-title');
-  if (mainTitle && !prefersReducedMotion) {
-    animate(mainTitle, 
-      { opacity: [0, 1], y: [10, 0] }, 
-      { duration: 0.15 }
-    );
-  } else if (mainTitle) {
-    mainTitle.style.opacity = '1';
+  if (prefersReducedMotion) {
+    // Show everything immediately for reduced motion
+    document.querySelectorAll('#main-title, #subtitle, .motion-section, .motion-section > *').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
   }
-
-  // Pulse animation for HR
-  const pulseHr = document.getElementById('pulse-hr');
-  if (pulseHr && !prefersReducedMotion) {
-    animate(pulseHr,
-      { opacity: [0.8, 1, 0.8] },
-      { duration: 6, repeat: Infinity }
-    );
-  }
-
-  // CTA button hover effects
+  
+  // Set up Intersection Observer for motion sections
+  const observerOptions = {
+    root: null,
+    rootMargin: '-10% 0px -10% 0px',
+    threshold: 0.2
+  };
+  
+  const observerCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('in-view')) {
+        // Add class to trigger CSS animations
+        entry.target.classList.add('in-view');
+        
+        // Stop observing this element
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+  
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  
+  // Observe all motion sections
+  document.querySelectorAll('.motion-section').forEach(section => {
+    observer.observe(section);
+  });
+  
+  // Enhanced CTA button interactions
   const ctaButton = document.getElementById('cta-button');
-  if (ctaButton && !prefersReducedMotion) {
+  if (ctaButton) {
+    let animationTimer;
+    
     ctaButton.addEventListener('mouseenter', () => {
-      animate(ctaButton, { scale: 1.02 }, { duration: 0.1 });
+      // Clear any existing animation
+      if (animationTimer) clearTimeout(animationTimer);
+      
+      // Add pulsing border effect
+      ctaButton.style.borderColor = '#000000';
+      animationTimer = setTimeout(() => {
+        ctaButton.style.borderColor = '#111827';
+      }, 400);
     });
     
     ctaButton.addEventListener('mouseleave', () => {
-      animate(ctaButton, { scale: 1 }, { duration: 0.1 });
-    });
-    
-    ctaButton.addEventListener('mousedown', () => {
-      animate(ctaButton, { scale: 0.95 }, { duration: 0.05 });
-    });
-    
-    ctaButton.addEventListener('mouseup', () => {
-      animate(ctaButton, { scale: 1.02 }, { duration: 0.05 });
+      if (animationTimer) clearTimeout(animationTimer);
+      ctaButton.style.borderColor = '#111827';
     });
   }
 });
 
-// Intersection Observer for section animations
-if (!prefersReducedMotion) {
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.4
-  };
+// Konami code easter egg (preserved from original)
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
 
-  const observerCallback = (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-        entry.target.setAttribute('data-animated', 'true');
+document.addEventListener('keydown', (e) => {
+  if (e.key === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      // Trigger easter egg
+      const ctaButton = document.getElementById('cta-button');
+      if (ctaButton) {
+        ctaButton.style.transition = 'all 0.5s ease';
+        ctaButton.style.transform = 'rotate(360deg) scale(1.2)';
+        ctaButton.style.background = '#111827';
+        ctaButton.style.color = '#ffffff';
         
-        animate(entry.target,
-          { opacity: [0, 1], y: [15, 0] },
-          { duration: 0.2 }
-        );
+        setTimeout(() => {
+          ctaButton.style.transform = 'rotate(0) scale(1)';
+          ctaButton.style.background = '';
+          ctaButton.style.color = '';
+        }, 500);
       }
-    });
-  };
-
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-  // Observe all motion sections
-  document.querySelectorAll('.motion-section').forEach(section => {
-    section.style.opacity = '0';
-    observer.observe(section);
-  });
-} else {
-  // If reduced motion is preferred, just show all sections
-  document.querySelectorAll('.motion-section').forEach(section => {
-    section.style.opacity = '1';
-  });
-}
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
