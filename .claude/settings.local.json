@@ -6,7 +6,12 @@
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_evaluate",
-      "mcp__playwright__browser_wait_for"
+      "mcp__playwright__browser_wait_for",
+      "WebFetch(domain:disequi.com)",
+      "WebFetch(domain:disequi.com)",
+      "Bash(curl:*)",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_hover"
     ],
     "deny": []
   }

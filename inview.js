@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pulseHr = document.getElementById('pulse-hr');
   if (pulseHr && !prefersReducedMotion) {
     animate(pulseHr,
-      { opacity: [0.6, 1, 0.6] },
+      { opacity: [0.8, 1, 0.8] },
       { duration: 6, repeat: Infinity }
     );
   }

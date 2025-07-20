@@ -89,3 +89,6 @@ Target platforms: Netlify/Vercel static or S3 + CloudFront
 Required headers:
 - CSS/JS: `Cache-Control: public,max-age=31536000,immutable`
 - HTML: `Cache-Control: no-cache`
+
+### Deployment Workflow
+- For deployment always read DEPLOYMENT.md and use wrangler to deploy.
