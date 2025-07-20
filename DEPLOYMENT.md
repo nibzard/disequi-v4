@@ -2,6 +2,8 @@
 
 This document provides complete instructions for deploying the disequi-v4 landing page to **Vercel** or **Cloudflare Workers**.
 
+**Current Status**: ✅ Successfully deployed to **Cloudflare Workers** at https://disequi.com
+
 ## Prerequisites
 
 - **Node.js** (v18 or later)
@@ -214,9 +216,22 @@ wrangler deploy --env production
 ```
 
 ### 6. Configure Custom Domain
+
+Add custom domain routes to `wrangler.toml`:
+
+```toml
+[[env.production.routes]]
+pattern = "disequi.com"
+custom_domain = true
+
+[[env.production.routes]]
+pattern = "www.disequi.com"
+custom_domain = true
+```
+
+Then redeploy:
 ```bash
-# Add custom domain (requires Cloudflare DNS)
-wrangler custom-domain add disequi.com --env production
+wrangler deploy --env production
 ```
 
 ---
@@ -393,15 +408,23 @@ wrangler rollback [deployment-id]
 
 ## 📝 Post-Deployment Checklist
 
-- [ ] Verify site loads at custom domain
-- [ ] Test all internal links (privacy, terms)
-- [ ] Confirm CTA button links to correct Cal.com URL
-- [ ] Check mobile responsiveness
-- [ ] Verify animations work (and respect reduced-motion)
-- [ ] Test page load speed (<1s LCP target)
-- [ ] Confirm bundle size under 7KB gzipped
-- [ ] Validate HTML and accessibility
+**Current Deployment Status (disequi.com)**:
+- [x] Verify site loads at custom domain
+- [x] Test all internal links (privacy, terms)
+- [x] Confirm CTA button links to correct Cal.com URL (https://cal.com/disequi/intro)
+- [x] Check mobile responsiveness
+- [x] Verify animations work (and respect reduced-motion)
+- [x] Test page load speed (<1s LCP target)
+- [x] Confirm bundle size under 7KB gzipped
+- [x] Validate HTML and accessibility
 - [ ] Set up monitoring/alerts (optional)
+
+**Current Version**: 6999c04d-cd73-4d0e-8e12-f97769a223f5  
+**Deployed**: 2025-07-20  
+**Live URLs**: 
+- https://disequi.com
+- https://www.disequi.com
+- https://disequi-v4-production.nikola-balic.workers.dev
 
 ---
 
