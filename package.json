@@ -6,9 +6,9 @@
   "scripts": {
     "build": "npm run build:css && npm run build:public",
     "build:css": "npx tailwindcss -c tailwind.config.js -m -o public/styles.css",
-    "build:public": "mkdir -p public && cp index.html privacy.html terms.html inview.js public/",
+    "build:public": "mkdir -p public && cp index.html privacy.html terms.html inview.js ogimage.png public/",
     "dev": "npx tailwindcss -c tailwind.config.js -w -o public/styles.css",
-    "serve": "python3 -m http.server 8000 --directory public",
+    "serve": "python3 -m http.server 8000 --directory public --bind 127.0.0.1",
     "test:size": "gzip -9c public/index.html public/styles.css public/inview.js | wc -c"
   },
   "devDependencies": {
