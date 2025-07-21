@@ -7,7 +7,12 @@ module.exports = {
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', '"Courier New"', 'monospace']
       },
       colors: {
-        accent: '#000'
+        accent: '#000',
+        // Brand colors from BRAND.md
+        'flame-primary': '#FF4500',
+        'flame-secondary': '#FF6B35', 
+        'electric-blue': '#00D4FF',
+        'steel-gray': '#4A4A4A'
       },
       lineHeight: {
         'relaxed-custom': '1.65'
