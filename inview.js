@@ -77,6 +77,9 @@ document.addEventListener('keydown', (e) => {
         ctaButton.style.background = '#111827';
         ctaButton.style.color = '#ffffff';
         
+        // Change the button text permanently
+        ctaButton.textContent = '[ No cheats, just grit ]';
+        
         setTimeout(() => {
           ctaButton.style.transform = 'rotate(0) scale(1)';
           ctaButton.style.background = '';
