@@ -18,135 +18,84 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="styles.css"/>
   <style>
-    /* CSS Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --border: #d3d3d3;
+      --flame: #ea580c;
+      --electric: #60a5fa;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f12;
+        --text: #d6d6d6;
+        --text-muted: #a3a3a3;
+        --border: #404040;
+        --electric: #60a5fa;
       }
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
     }
     
-    @keyframes subtlePulse {
-      0%, 100% {
-        opacity: 0.8;
-        transform: scaleX(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scaleX(1.005);
-      }
+    /* Text color overrides */
+    body *, p, h1, h2, h3, h4, h5, h6 {
+      color: var(--text);
     }
     
-    @keyframes staggerReveal {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-        filter: blur(1px);
-      }
-      60% {
-        opacity: 0.6;
-        transform: translateY(10px) scale(0.98);
-        filter: blur(0.5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
+    h2 {
+      font-size: 16px;
     }
     
-    /* Initial states */
     #main-title {
-      opacity: 0;
-      animation: fadeInUp 0.4s ease-out forwards;
+      white-space: nowrap;
     }
     
-    #subtitle {
-      opacity: 0;
-      animation: fadeInUp 0.5s ease-out 0.2s forwards;
+    @media (max-width: 640px) {
+      #main-title { white-space: normal; }
     }
     
-    #pulse-hr {
-      animation: subtlePulse 8s ease-in-out infinite;
+    .text-muted {
+      color: var(--text-muted);
     }
     
-    /* Motion sections - hidden by default */
-    .motion-section {
-      opacity: 0;
+    .flame {
+      color: var(--flame);
     }
     
-    .motion-section.in-view {
-      opacity: 1;
+    .electric {
+      color: var(--electric);
     }
     
-    .motion-section.in-view > * {
-      animation: staggerReveal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    @media (prefers-color-scheme: dark) {
+      h2.flame { color: var(--text); }
     }
     
-    /* Stagger delays for children */
-    .motion-section.in-view > *:nth-child(1) { animation-delay: 0s; }
-    .motion-section.in-view > *:nth-child(2) { animation-delay: 0.08s; }
-    .motion-section.in-view > *:nth-child(3) { animation-delay: 0.16s; }
-    .motion-section.in-view > *:nth-child(4) { animation-delay: 0.24s; }
-    .motion-section.in-view > *:nth-child(5) { animation-delay: 0.32s; }
-    .motion-section.in-view > *:nth-child(6) { animation-delay: 0.40s; }
+    hr {
+      border-color: var(--border);
+    }
     
-    /* CTA Button animations */
+    /* CTA Button */
     #cta-button {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease-out;
-    }
-    
-    #cta-button::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, transparent, rgba(17,24,39,0.1), transparent);
-      border-radius: inherit;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
+      transition: all 0.2s ease-out;
+      border-color: var(--text);
+      color: var(--text);
+      text-decoration: none;
     }
     
     #cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 16px rgba(17,24,39,0.25);
-    }
-    
-    #cta-button:hover::before {
-      opacity: 1;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+      border-color: var(--flame);
+      background-color: var(--flame);
+      color: #000;
     }
     
     #cta-button:active {
-      transform: scale(0.98);
-      box-shadow: 0 0 4px rgba(17,24,39,0.4);
-    }
-    
-    /* Respect reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      
-      #main-title, #subtitle, .motion-section, .motion-section > * {
-        opacity: 1 !important;
-        transform: none !important;
-      }
+      box-shadow: 0 1px 4px rgba(234, 88, 12, 0.35);
     }
   </style>
   <script type="application/ld+json">
@@ -157,7 +106,7 @@
     "alternateName": "DISEQUI - The Shadow Studio",
     "url": "https://disequi.com",
     "logo": "https://disequi.com/ogimage.png",
-    "description": "Fractional growth marketing, product and R&D services for startups worldwide. Expert consultants for capital-backed companies.",
+    "description": "Fractional growth marketing, product and R&D services for funded startups worldwide.",
     "foundingDate": "2024",
     "legalName": "Disequi d.o.o.",
     "address": {
@@ -172,9 +121,7 @@
       "contactType": "Business Development",
       "url": "https://cal.com/disequi/intro"
     },
-    "sameAs": [
-      "https://disequi.com"
-    ],
+    "sameAs": ["https://disequi.com"],
     "serviceArea": {
       "@type": "Place",
       "name": "Worldwide"
@@ -204,7 +151,7 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Startup Consulting",
-            "description": "Strategic consulting for capital-backed startups"
+            "description": "Strategic consulting for funded startups"
           }
         }
       ]
@@ -212,79 +159,78 @@
   }
   </script>
 </head>
-<body class="bg-white text-gray-900 font-mono leading-relaxed-custom text-base sm:text-base">
-  <main id="app">
+<body class="font-mono leading-relaxed-custom">
+  <main>
     <header class="max-w-container mx-auto px-6 sm:px-4 py-12 sm:py-10 text-center">
-      <h1 id="main-title" class="text-3xl sm:text-4xl font-bold tracking-wide opacity-0 font-sans"><span class="text-flame-primary">DISEQUI</span>  ·  THE SHADOW STUDIO</h1>
-      <p id="subtitle" class="mt-4 text-sm sm:text-sm tracking-widest uppercase text-gray-600 font-mono">"When everything tilts out of balance, we work in the half‑light where ideas learn to breathe."</p>
-      <hr class="border-dashed border-gray-300 my-8" id="pulse-hr"/>
+      <h1 id="main-title" class="text-3xl sm:text-4xl font-bold tracking-wide font-sans">
+        <span class="flame">DISEQUI</span> · THE SHADOW STUDIO
+      </h1>
+      <p class="mt-4 text-sm tracking-widest uppercase text-muted">
+        When everything tilts out of balance, we work in the half‑light where ideas learn to breathe.
+      </p>
+      <hr class="border-dashed my-8"/>
     </header>
 
     <div class="max-w-container mx-auto px-6 sm:px-4 prose prose-base sm:prose">
-
-      <section class="motion-section my-12 sm:my-10">
-        <p class="mb-6 text-center text-gray-600"><strong><span class="text-flame-secondary">→</span> The Problem</strong></p>
-        <p class="mb-6">You, funded founder, sit at <strong class="text-flame-secondary">T‑minus‑18 months</strong>.</p>
+      <section class="my-12 sm:my-10">
+        <p class="mb-6 text-center text-muted"><strong><span class="flame">→</span> The Problem</strong></p>
+        <p class="mb-6">You, funded founder, sit at <strong class="flame">T‑minus‑18 months</strong>.</p>
         <p class="mb-6">The wire hit, the celebratory Slack emoji has scrolled out of view, and the cap table now whispers: <em>Show results or vanish.</em></p>
         <p class="mb-6">Your burn is ticking, your backlog looks like spilled spaghetti, and investors only smile when you email actual traction graphs.</p>
-        <p class="mb-6">Everything's in disequilibrium -- which is exactly where we begin.</p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <p class="mb-6 text-center text-gray-600"><strong><span class="text-flame-secondary">→</span> The Solution</strong></p>
+      <section class="my-12 sm:my-10">
+        <p class="mb-6 text-center text-muted"><strong><span class="flame">→</span> The Solution</strong></p>
         <p class="mb-6"><em>Hi. We're Disequi.</em></p>
-
-        <p class="mb-6">We are the <strong class="text-flame-secondary">architects of investable growth for capital‑backed rebels</strong> -- the off‑screen crew who drag plots from "so it goes" to "so it grows."</p>
-        <p class="mb-6">Picture Vonnegut's friendly ghost on the fire escape: handing you tools while the building smolders, joking about entropy, then mapping the exit that turns chaos into equilibrium, entropy into metrics.</p>
+        <p class="mb-6">We are the <strong class="flame">architects of investable growth for funded rebels</strong>.</p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <h2 class="text-xl sm:text-xl font-semibold mb-4 font-sans text-flame-primary">CHAPTER 1 — UNSTUCK</h2>
-        <p class="mb-4 text-gray-600 font-mono"><span class="text-flame-secondary">></span> "Minus‑one to zero before the espresso cools."</p>
+      <section class="my-12 sm:my-10">
+        <h2 class="font-semibold mb-4 font-sans flame">CHAPTER 1 — UNSTUCK</h2>
+        <p class="mb-4 text-muted"><span class="flame">></span> "Minus‑one to zero before the espresso cools."</p>
         <p class="mb-6">We laser the real bottleneck—market, product, or message—then flip it.</p>
         <p>Code or no‑code, AI or elbow grease: whatever crushes inertia fastest.</p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <h2 class="text-xl sm:text-xl font-semibold mb-4 font-sans text-flame-primary">CHAPTER 2 — THE ANTI‑PLAYBOOK</h2>
+      <section class="my-12 sm:my-10">
+        <h2 class="font-semibold mb-4 font-sans flame">CHAPTER 2 — THE ANTI‑PLAYBOOK</h2>
         <p class="mb-6">Developers <strong>hate</strong> funnels.</p>
         <p class="mb-6">Investors <strong>love</strong> traction math.</p>
         <p class="mb-6">Everyone says you must choose.</p>
         <p><strong>We translate.</strong></p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <h2 class="text-xl sm:text-xl font-semibold mb-4 font-sans text-flame-primary">CHAPTER 3 — FRACTIONAL FIREPOWER</h2>
+      <section class="my-12 sm:my-10">
+        <h2 class="font-semibold mb-4 font-sans flame">CHAPTER 3 — FRACTIONAL FIREPOWER</h2>
         <p class="mb-4">Pick any two, swap later, pay only for brains in use:</p>
-        <p class="mb-4 text-sm sm:text-base"><strong>● Growth&nbsp;&nbsp;&nbsp;&nbsp;● Product&nbsp;&nbsp;&nbsp;&nbsp;● Marketing&nbsp;&nbsp;&nbsp;&nbsp;● R&D&nbsp;&nbsp;&nbsp;&nbsp;● Research</strong></p>
-        <p>(Collect the whole set once Series A is in sight.)</p>
+        <p class="mb-4"><strong>● Growth&nbsp;&nbsp;&nbsp;&nbsp;● Product&nbsp;&nbsp;&nbsp;&nbsp;● Marketing&nbsp;&nbsp;&nbsp;&nbsp;● R&D&nbsp;&nbsp;&nbsp;&nbsp;● Research</strong></p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <h2 class="text-xl sm:text-xl font-semibold mb-4 font-sans text-flame-primary">CHAPTER 4 — MONEY TALKS, WE DON'T</h2>
+      <section class="my-12 sm:my-10">
+        <h2 class="font-semibold mb-4 font-sans flame">CHAPTER 4 — MONEY TALKS, WE DON'T</h2>
         <p class="mb-6">Sworn to secrecy. NDA at hello. No public trophies, no logos, just new J‑curves and the quiet thud of shareholder updates landing on time.</p>
       </section>
 
-      <section class="motion-section my-12 sm:my-10">
-        <h2 class="text-xl sm:text-xl font-semibold mb-4 font-sans text-flame-primary">CHAPTER 5 — THE CHEATCODE</h2>
-        <p class="mb-6">In disequilibrium? We're the counterweight.</p>
-        <div class="text-center my-16 sm:my-14">
-          <a href="https://cal.com/disequi/intro"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Book 20‑minute intro with Nikola"
-             id="cta-button"
-             class="inline-block px-10 py-4 sm:px-8 sm:py-3 border-2 border-gray-900 text-gray-900 font-semibold tracking-wide hover:bg-flame-primary hover:border-flame-primary hover:text-white transition-colors duration-200 text-lg sm:text-base min-h-[48px] flex items-center justify-center">
-            [ Book the cheatcode ]
-          </a>
-          <p class="text-base sm:text-sm text-gray-600 mt-3 sm:mt-2">15‑min call with Nikola</p>
-          <p class="text-base sm:text-sm text-gray-600">(confirmation required)</p>
-          <p class="text-xs text-electric-blue mt-1">↑ ↑ ↓ ↓ ← → ← → B A START</p>
-        </div>
+      <section class="my-12 sm:my-10">
+        <h2 class="font-semibold mb-4 font-sans flame">CHAPTER 5 — THE CHEATCODE</h2>
+        <p class="mb-6">In <span class="flame">disequi</span>librium? We're the counterweight.</p>
       </section>
+
+      <div class="text-center my-16 sm:my-14">
+        <a href="https://cal.com/disequi/intro"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Book 15-minute intro call with Nikola"
+           id="cta-button"
+           class="block px-10 py-4 sm:px-8 sm:py-3 border-2 font-semibold tracking-wide text-lg sm:text-base min-h-[48px]">
+          15‑min call with Nikola
+        </a>
+        <p class="text-sm text-muted mt-3 sm:mt-2">(confirmation required)</p>
+        <p class="text-xs electric mt-1">↑ ↑ ↓ ↓ ← → ← → B A START</p>
+      </div>
     </div>
 
-    <hr class="border-dashed border-gray-300 my-8 max-w-screen-sm mx-auto"/>
+    <hr class="border-dashed my-8 max-w-screen-sm mx-auto"/>
 
     <footer class="text-sm sm:text-xs text-gray-500 text-center py-10 sm:py-8 px-6 sm:px-4">
       <p><em>Epilogue</em><br/>
@@ -295,6 +241,33 @@
     </footer>
   </main>
 
-  <script src="inview.js"></script>
+  <script>
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      const btn = document.getElementById('cta-button');
+      if (btn) {
+        btn.style.transition = 'all 0.5s ease';
+        btn.style.transform = 'rotate(360deg) scale(1.2)';
+        btn.style.background = '#111827';
+        btn.style.color = '#fff';
+        btn.textContent = '[ No cheats, just grit ]';
+        setTimeout(() => {
+          btn.style.transform = 'rotate(0) scale(1)';
+          btn.style.background = '';
+          btn.style.color = '';
+        }, 500);
+      }
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+  </script>
 </body>
 </html>

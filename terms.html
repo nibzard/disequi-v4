@@ -64,24 +64,62 @@
         <h3 class="text-base font-semibold mb-3 text-gray-700">Company Details</h3>
         <p class="mb-2 text-sm leading-relaxed">Disequi d.o.o.</p>
         <p class="mb-2 text-sm leading-relaxed">Headquarter: R. Boškovića 27, 21000 Split, Croatia</p>
-        <p class="mb-2 text-sm leading-relaxed">VAT: HR55950527428</p>
+        <div class="mb-2 text-sm leading-relaxed flex items-center gap-2">
+          <span>VAT: <strong>HR55950527428</strong></span>
+          <button onclick="copyToClipboard('HR55950527428')" class="text-gray-500 hover:text-gray-700 cursor-pointer" title="Copy VAT number">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </button>
+        </div>
         <p class="mb-2 text-sm leading-relaxed">The company is registered at the Commercial Court in Split under registration number (MBS) 060484565.</p>
         <p class="mb-2 text-sm leading-relaxed">Share capital: 2.500,00 EUR (paid in full)</p>
         <p class="mb-4 text-sm leading-relaxed">Board member: Nikola Balić</p>
         
         <h3 class="text-base font-semibold mb-3 text-gray-700">Bank Details</h3>
-        <p class="mb-2 text-sm leading-relaxed">RAIFFEISENBANK AUSTRIA d.d.</p>
-        <p class="mb-2 text-sm leading-relaxed">IBAN: HR2024840081135402740</p>
-        <p class="mb-4 text-sm leading-relaxed">SWIFT: RZBHHR2X</p>
+        <div class="bg-gray-50 p-4 rounded border border-gray-200">
+          <p class="mb-3 text-sm leading-relaxed font-medium">RAIFFEISENBANK AUSTRIA d.d.</p>
+          <div class="mb-2 text-sm leading-relaxed flex items-center gap-2">
+            <span>IBAN: <strong>HR2024840081135402740</strong></span>
+            <button onclick="copyToClipboard('HR2024840081135402740')" class="text-gray-500 hover:text-gray-700 cursor-pointer" title="Copy IBAN">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="mb-0 text-sm leading-relaxed flex items-center gap-2">
+            <span>SWIFT: <strong>RZBHHR2X</strong></span>
+            <button onclick="copyToClipboard('RZBHHR2X')" class="text-gray-500 hover:text-gray-700 cursor-pointer" title="Copy SWIFT code">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
       </section>
     </div>
 
     <hr class="border-dashed border-gray-300 my-8"/>
     
-    <footer class="text-xs text-gray-500 text-center py-4">
-      <p>© 2024‑2025 Disequi d.o.o. · <a href="index.html" class="underline">Home</a> · <a href="privacy.html" class="underline">Privacy</a></p>
-      <p class="mt-2 text-xs">Last updated: July 2025</p>
-    </footer>
+{{FOOTER}}
   </main>
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        // Show temporary feedback
+        const event = window.event;
+        const button = event.target.closest('button');
+        const originalTitle = button.title;
+        button.title = 'Copied!';
+        button.style.color = '#10b981';
+        setTimeout(() => {
+          button.title = originalTitle;
+          button.style.color = '';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    }
+  </script>
 </body>
 </html>
