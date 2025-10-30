@@ -2,11 +2,13 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // Handle clean URLs for privacy and terms
+    // Handle clean URLs for privacy, terms, and article
     if (url.pathname === '/privacy') {
       url.pathname = '/privacy.html';
     } else if (url.pathname === '/terms') {
       url.pathname = '/terms.html';
+    } else if (url.pathname === '/navigating-ai-era') {
+      url.pathname = '/navigating-ai-era.html';
     }
     
     // Serve static assets
