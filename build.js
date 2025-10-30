@@ -14,7 +14,7 @@ const footerPath = path.join(__dirname, 'src', 'footer.html');
 const sharedFooter = fs.existsSync(footerPath) ? fs.readFileSync(footerPath, 'utf8') : '';
 
 // Files to process (HTML files that need footer injection)
-const htmlFiles = ['index.html', 'privacy.html', 'terms.html'];
+const htmlFiles = ['index.html', 'privacy.html', 'terms.html', 'navigating-ai-era.html'];
 
 // Other files to copy as-is
 const otherFiles = [
