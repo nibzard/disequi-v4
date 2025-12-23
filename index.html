@@ -265,33 +265,6 @@
 {{FOOTER}}
   </main>
 
-  <script>
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === konamiCode[konamiIndex]) {
-    konamiIndex++;
-    if (konamiIndex === konamiCode.length) {
-      const btn = document.getElementById('cta-button');
-      if (btn) {
-        btn.style.transition = 'all 0.5s ease';
-        btn.style.transform = 'rotate(360deg) scale(1.2)';
-        btn.style.background = '#111827';
-        btn.style.color = '#fff';
-        btn.textContent = '[ No cheats, just grit ]';
-        setTimeout(() => {
-          btn.style.transform = 'rotate(0) scale(1)';
-          btn.style.background = '';
-          btn.style.color = '';
-        }, 500);
-      }
-      konamiIndex = 0;
-    }
-  } else {
-    konamiIndex = 0;
-  }
-});
-  </script>
+  <script src="inview.js"></script>
 </body>
 </html>
