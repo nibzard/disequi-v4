@@ -1,4 +1,4 @@
-name = "disequi-v4"
+name = "disequi-v4-production"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
 
